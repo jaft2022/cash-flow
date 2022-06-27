@@ -1,17 +1,17 @@
 <template>
   <div class="movements">
     <h2 class="title">Historial</h2>
-    <div class="content">
-      <Movement 
-        v-for="{id, title, description, amount, time} in movements" 
-        :key="id"
-        :id="id"
-        :title="title"
-        :description="description"
-        :time="time"
-        :amount="amount"
-        @remove="remove"
-      />
+      <div class="content">
+        <Movement 
+          v-for="{id, title, description, amount, time} in movements" 
+          :key="id"
+          :id="id"
+          :title="title"
+          :description="description"
+          :time="time"
+          :amount="amount"
+          @remove="remove"
+        />
     </div>
   </div>
 </template>

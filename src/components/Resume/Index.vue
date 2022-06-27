@@ -1,7 +1,7 @@
 <template>
     <main>
       <p>
-        {{dateSelectedVisual}}
+        {{ timeFormat }}
       </p>
       <h1>{{ amountCurrency }}</h1>
       <div class="graphic">
@@ -35,13 +35,26 @@ export default {
     amountVisual():any {
       return this.amount !== null ? this.amount : this.totalAmount
     },
-    dateSelectedVisual():any{
-      if(this.dateSelected !== null) {
-        const fomatDate = this.dateSelected.toISOString().slice(0, 16).replace("T", " ")
-        return fomatDate
-      }else {
-        return this.label
-      }
+    timeFormat() {
+      if(this.dateSelected === null) return this.label
+
+      const date = new Date(this.dateSelected)
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour "0" should be "12"
+      minutes = minutes < 10 ? 0 + minutes : minutes;
+      var strTime = hours + ":" + minutes + " " + ampm;
+      return (
+        date.getDate() +
+        "/" +
+        new Intl.DateTimeFormat("en", { month: "short" }).format(date) +
+        "/" +
+        date.getFullYear() +
+        " " +
+        strTime
+      );
     },
     
     amountCurrency(){

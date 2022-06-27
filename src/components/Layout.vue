@@ -9,9 +9,11 @@
       <div class="head" @click="showMovements = !showMovements">
           <div class="grip"></div>
       </div>
+  <Transition name="movements-body">
       <div class="body" v-show="showMovements">
         <slot name="movements"></slot>
       </div>
+  </Transition>
   </div>
 </template>
 
@@ -64,13 +66,26 @@ export default{
   box-sizing: border-box;
 }
 .movements .body {
-  height: 75vh;
   width: 100%;
+  height: 75vh;
 }
 .movements .head .grip {
   width: 120px;
   height: 8px;
   background-color: #e5e5e5;
   border-radius: 4px;
+}
+
+.movements-body-enter-active,
+.movements-body-leave-active {
+  transition: all 0.8s;
+  max-height: 75vh;
+}
+.movements-body-enter-from,
+.movements-body-leave-to
+{
+  transition: all 0.8s;
+  opacity: 0;
+  max-height: 0vh;
 }
 </style>

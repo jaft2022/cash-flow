@@ -94,7 +94,7 @@ export default {
       </Resume>
     </template>
     <template #movements>
-      <Movements @remove="remove"/>
+        <Movements  @remove="remove"/>
     </template>
   </Layout>
 </template>
