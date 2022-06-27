@@ -2,7 +2,7 @@
   <div class="content__graphic">
     <svg
         @touchstart="tapTouch"
-        @touchmove="tap"
+        @touchmove="tapTouch"
         @touchend="unTap" 
         viewBox="0 0 300 200">
       <line
@@ -62,10 +62,11 @@ export default {
       })
     }
     watch(pointer, (value) => {
+      
       const index = Math.ceil((value / (300 / amounts().length)));
       if(index < 0 || index > amounts().length) return;
 
-      emit('select', amounts()[index - 1])
+      emit('select', amounts()[index - 1], index)
 
     })
     function amountToPixels(amount) {
@@ -77,6 +78,7 @@ export default {
       return 200 - ((amountAbs * 100) / minMax) * 2;
     }
     const tapTouch = ({target, touches}) =>{
+        console.log("Targte: ", target, touches)
         showPointer.value = true;
         const elementWidth = target.getBoundingClientRect().width;
         const elementX = target.getBoundingClientRect().x;

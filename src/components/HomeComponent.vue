@@ -25,10 +25,10 @@ export default {
     },
   setup() {
     const amount = ref<null | number>(null)
-    const dateSelected = ref<null | Date>(new Date())
 
     const store = useStore()
     const {movements} = storeToRefs(store);
+    const dateSelected = ref<null | Date | string>(null)
 
     console.log("Movemnts: ",movements);
     return {
@@ -41,14 +41,17 @@ export default {
   
   methods:{
     create(movement:any){
-      this.store.createMovement(movement)
+      this.store.createMovement(movement);
     },
     remove(id:number){
       const index = this.movements.findIndex((m:any) => m.id === id);
       this.movements.splice(index, 1);
     },
-    select(el:any){
+    select(el:any, index:number){
+      console.log("Select: el", el)
+      console.log("Select: index", index)
       this.amount = el;
+      this.dateSelected = this.movements[index -1]?.time;
     }
   },
   mounted(){
